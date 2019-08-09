@@ -61,12 +61,10 @@ class getGroupMembersFiles(object):
         if self.get_ans == "yes":
             self.con_exit = 0
             logging.info("back up permission granted {}".format(str(self.con_exit)))
-            #return self.con_exit
 
         elif self.get_ans == "no":
             self.con_exit = 1
             logging.info("back up permission not granted {}".format(str(self.con_exit)))
-            #return self.con_exit
             exit(1)
 
         else:
@@ -86,22 +84,22 @@ class getGroupMembersFiles(object):
             print(self.os_dir, "does not exist.")
 
             self.get_con_ = input(
-                "Do you want this program to create {} ?  yes/no\n".format(self.os_dir))
+                "Do you want this program to create {}? yes/no\n".format(self.os_dir))
 
             if self.get_con_ == "yes":
-                print("creating", self.os_dir)
+                print("creating new backup directory {}".format(str(self.os_dir)))
                 
-                new_dir = os.mkdir(self.os_dir)
-                logging.info("new directory {} created".format(str(new_dir)))
-                return new_dir
+                self.new_dir = os.mkdir(self.os_dir)
+                logging.info("new directory {} created".format(str(self.new_dir)))
+                return self.new_dir
             else:
                 
                 logging.warning(
                     "exit status 1 {} does not exist".format(self.os_dir))
                 exit(1)
-        return os_dir
+        return self.os_dir
 
-
+        
     def backup_group_user_files(self):
         """
         This function;
@@ -144,6 +142,6 @@ try:
     group_names_input.backup_group_user_files()
 
 except KeyError:
-    
+
     print("program failed to complete back up process")
     logging.error("back up process failed exit status 1")
