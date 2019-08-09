@@ -18,6 +18,12 @@ class getGroupMembersFiles(object):
         
 
     def get_and_check_grp_info(self):
+        """"
+        This function;
+        - gets and prints out group infomations
+        - create a unique list of users incase if one user belongs to multiple groups
+        """
+
         self.grp_mem_ = list()
 
         for grp_name in self.grp_names:
@@ -97,7 +103,6 @@ class getGroupMembersFiles(object):
     def backup_group_user_files(self):
         """
         This function;
-        - creates a log file
         - copys members all files to an archive directory
         """
         # get group names from as input from terminal
