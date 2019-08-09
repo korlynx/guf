@@ -60,17 +60,18 @@ class getGroupMembersFiles(object):
 
         if self.get_ans == "yes":
             self.con_exit = 0
-            logging.info("back up permission granted")
-            return self.con_exit
+            logging.info("back up permission granted {}".format(str(self.con_exit)))
+            #return self.con_exit
+
         elif self.get_ans == "no":
             self.con_exit = 1
-            logging.info("back up permission not granted")
-            return self.con_exit
+            logging.info("back up permission not granted {}".format(str(self.con_exit)))
+            #return self.con_exit
+            exit(1)
+
         else:
             logging.error("enter yes or no to confirm back up permission")
             print("answer with yes or no")
-
-
             self.get_confirmation()
 
 
@@ -94,9 +95,10 @@ class getGroupMembersFiles(object):
                 logging.info("new directory {} created".format(str(new_dir)))
                 return new_dir
             else:
-                exit(1)
+                
                 logging.warning(
                     "exit status 1 {} does not exist".format(self.os_dir))
+                exit(1)
         return os_dir
 
 
@@ -123,25 +125,25 @@ class getGroupMembersFiles(object):
         target_dir = self.check_backup_dir(self.backup_target)
 
         # copy members files to an archive directory
-        for user_name in group_info_:
-            self.res = subprocess.call(["cp", "-rf", "/home/"+user_name, target_dir])
+        for self.user_name in group_info_:
+            self.res = subprocess.call(["cp", "-rf", "/home/"+self.user_name, target_dir])
 
             if self.res == 0:
                 logging.info(
-                    "back up {} files to an archive directory successful".format(str(user_name)))
+                    "back up {} files to an archive directory successful".format(str(self.user_name)))
                 logging.info("exit status = {}".format(str(self.res)))
             else:
                 logging.info(
-                    "back up {} files to an archive directory failed".format(str(user_name)))
+                    "back up {} files to an archive directory failed".format(str(self.user_name)))
                 logging.warning("exit status = {}".format(str(self.res)))
         print("back up completed succesfully")
 
+try:
 
-def main():
     group_names_input = getGroupMembersFiles()
     group_names_input.backup_group_user_files()
 
-
-if __name__ == "__main__":
-    main()
-
+except KeyError:
+    
+    print("program failed to complete back up process")
+    logging.error("back up process failed exit status 1")
