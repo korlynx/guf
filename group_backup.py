@@ -93,7 +93,6 @@ class GroupMembersFiles:
 
 
     def creat_new_target_dir(self, os_dir):
-
         self.new_dir = os.mkdir(os_dir)
         return self.new_dir
 
