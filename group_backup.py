@@ -11,7 +11,10 @@ logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="backup.log", level=logging.DEBUG)
 
 class GroupMembersFiles:
-
+    """
+    This program 
+    locates all files owned by the members of a group and moved them to an archive folder 
+    """
 
     def __init__(self):
         self.grp_names = input("enter group name/(s): ").split(" ")
@@ -102,8 +105,8 @@ class GroupMembersFiles:
         This function;
         - copys members all files to an archive directory
         """
-        # get group names from as input from terminal
-        grp_names_ = self.grp_names
+        
+        grp_names_ = self.grp_names  # get group names from as input from terminal
 
         # get group informations
         group_info_ = self.check_grp_names()
@@ -112,8 +115,7 @@ class GroupMembersFiles:
             "list of users file to be archived: {}".format(str(group_info_)))
         print(grp_users)
 
-        # assert back up permission
-        self.get_confirmation()
+        self.get_confirmation()  # assert back up permission
 
         # get back up directory as input from terminal
         backup_target = input("enter target backup directory: ")
@@ -125,7 +127,7 @@ class GroupMembersFiles:
         if target_dir == 1:
             print(backup_target, "does not exist.")
             self.get_con_ = input(
-                "Do you want this program to create {}? yes/no\n".format(backup_target))
+                "do you want this program to create {}? yes/no\n".format(backup_target))
 
             if self.get_con_ == "yes":
                 print("creating new backup directory {}".format(backup_target))
@@ -135,17 +137,18 @@ class GroupMembersFiles:
 
         # copy members files to an archive directory
         for user_name in grp_users:
+            logging.info("starting backup of {}".format(user_name))
             self.res = subprocess.call(["cp", "-rf", "/home/"+user_name, str(target_dir)])
 
             if self.res == 0:
                 logging.info(
-                    "back up {} files to an archive directory successful".format(user_name))
+                    "backup {} files to an archive directory successful".format(user_name))
                 logging.info("exit status = {}".format(str(self.res)))
             else:
                 logging.info(
-                    "back up {} files to an archive directory failed".format(user_name))
+                    "backup {} files to an archive directory failed".format(user_name))
                 logging.warning("exit status = {}".format(str(self.res)))
-        print("back up completed succesfully")
+        print("backup completed succesfully")
 
 try:
 
