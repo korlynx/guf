@@ -6,7 +6,7 @@ import logging
 import itertools
 import numpy as np
 
-#create a log file for the archived group members
+#create a log file
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="backup.log", level=logging.DEBUG)
 
@@ -19,9 +19,9 @@ class GroupMembersFiles:
     def __init__(self):
         self.grp_names = input("enter group name/(s): ").split(" ")
         logging.info("input group name {}".format(str(self.grp_names)))
+         
         
-        
-    def check_grp_names(self):
+    def get_grp_infos(self):
 
         for self.grp_name_ in self.grp_names:
         
@@ -43,8 +43,7 @@ class GroupMembersFiles:
     def get_unique_users(self):
         """"
         This function;
-        - gets and prints out group infomations
-        - create a unique list of users incase if one user belongs to multiple groups
+        - create a unique list of all users, incase a user belongs to multiple groups
         """
 
         self.grp_mem_ = list()
@@ -109,7 +108,7 @@ class GroupMembersFiles:
         grp_names_ = self.grp_names  # get group names from as input from terminal
 
         # get group informations
-        group_info_ = self.check_grp_names()
+        group_info_ = self.get_grp_infos()
         grp_users = self.get_unique_users()
         logging.info(
             "list of users file to be archived: {}".format(str(group_info_)))
@@ -157,5 +156,5 @@ try:
 
 except KeyError:
 
-    print("program failed to complete back up process")
-    logging.error("back up process failed exit status 1")
+    print("Backup process failed")
+    logging.error("back up process failed exit status => 1")

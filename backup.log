@@ -165,3 +165,12 @@
 2019-08-10 01:58:43,309: INFO: list of users file to be archived: None
 2019-08-10 01:58:48,466: INFO: back up permission granted 0
 2019-08-10 01:58:53,614: INFO: get target directory name from terminal
+2019-08-11 23:28:29,549: INFO: input group name ['NEWuSERS']
+2019-08-11 23:28:29,551: WARNING: input group name NEWuSERS does not exist!
+2019-08-11 23:28:42,191: INFO: input group name ['newUsers#']
+2019-08-11 23:28:42,193: WARNING: input group name newUsers# does not exist!
+2019-08-11 23:28:49,398: INFO: input group name ['newUsers']
+2019-08-11 23:28:49,399: INFO: grp.struct_group(gr_name='newUsers', gr_passwd='x', gr_gid=1006, gr_mem=['kait', 'user1', 'user2', 'user3'])
+2019-08-11 23:28:49,415: INFO: generating unique users list from group name/(s)
+2019-08-11 23:28:49,415: INFO: list of users file to be archived: None
+2019-08-11 23:28:57,397: INFO: back up permission not granted 1
