@@ -17,33 +17,34 @@ class GroupMembersFiles:
     """
 
     def __init__(self):
-        self.grp_names = input("enter group name/(s): ").split(" ")
+        grp_names = input("enter group name/(s): ")
+        self.grp_names = grp_names.split(" ")
         logging.info("input group name {}".format(str(self.grp_names)))
-         
         
+         
     def get_grp_infos(self):
 
-        for self.grp_name_ in self.grp_names:
-        
+        for grp_name in self.grp_names:
+
             try:
-                self.group_info_ = grp.getgrnam(self.grp_name_)
+                self.group_info_ = grp.getgrnam(grp_name)
                 print("{}".format(str(self.group_info_)))
                 logging.info("{}".format(str(self.group_info_)))
 
             except KeyError:
 
-                print("input group name {} does not exist!".format(self.grp_name_))
+                print("input group name {} does not exist!".format(grp_name))
                 logging.warning(
-                    "input group name {} does not exist!".format(self.grp_name_))
+                    "input group name {} does not exist!".format(grp_name))
                 exit(1)
                 logging.info(
-                    "exit status 1 {} does not exist".format(self.grp_name_))
+                    "exit status 1 {} does not exist".format(grp_name))
 
 
     def get_unique_users(self):
         """"
         This function;
-        - create a unique list of all users, incase a user belongs to multiple groups
+        - creates a unique list of all users, incase a user belongs to multiple groups
         """
 
         self.grp_mem_ = list()
@@ -111,7 +112,7 @@ class GroupMembersFiles:
         group_info_ = self.get_grp_infos()
         grp_users = self.get_unique_users()
         logging.info(
-            "list of users file to be archived: {}".format(str(group_info_)))
+            "names of users to be backuped: {}".format(str(grp_users)))
         print(grp_users)
 
         self.get_confirmation()  # assert back up permission

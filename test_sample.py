@@ -1,5 +1,7 @@
 import app
 from group_backup import GroupMembersFiles
+import getuserfile
+import os
 
 def test_app():
     input_values = [2, 3]
@@ -20,17 +22,9 @@ def test_app():
     ]
 
 
-def test_init():
-    input_grpname = "newUsers"
-    output = []
 
-    def mock_input(s):
-        output.append(s)
-        return input_grpname.pop(0)
 
-    GroupMembersFiles().input = mock_input
-    GroupMembersFiles().print = lambda s: output.append(s)
-    GroupMembersFiles()
+def test_check_backup_dir():
+    os_dir = "/home/nonso/Desktop/linux_project/guf"
 
-    assert output == ["newUsers"]
-
+    return getuserfile.check_backup_dir(os_dir) == os.path.exists(os_dir)

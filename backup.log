@@ -174,3 +174,41 @@
 2019-08-11 23:28:49,415: INFO: generating unique users list from group name/(s)
 2019-08-11 23:28:49,415: INFO: list of users file to be archived: None
 2019-08-11 23:28:57,397: INFO: back up permission not granted 1
+2019-08-12 20:47:35,432: INFO: input group name ['newUsers']
+2019-08-12 20:47:35,433: INFO: grp.struct_group(gr_name='newUsers', gr_passwd='x', gr_gid=1006, gr_mem=['kait', 'user1', 'user2', 'user3'])
+2019-08-12 20:47:35,434: INFO: generating unique users list from group name/(s)
+2019-08-12 20:47:35,434: INFO: list of users file to be archived: None
+2019-08-12 20:49:06,177: INFO: back up permission not granted 1
+2019-08-12 20:53:24,280: INFO: input group name ['newUsers']
+2019-08-12 20:53:24,281: INFO: grp.struct_group(gr_name='newUsers', gr_passwd='x', gr_gid=1006, gr_mem=['kait', 'user1', 'user2', 'user3'])
+2019-08-12 20:53:24,281: INFO: generating unique users list from group name/(s)
+2019-08-12 20:53:24,282: INFO: list of users file to be archived: ['kait' 'user1' 'user2' 'user3']
+2019-08-12 20:53:27,869: INFO: back up permission not granted 1
+2019-08-12 20:55:35,469: INFO: input group name ['foo', 'newUsers']
+2019-08-12 20:55:35,470: INFO: grp.struct_group(gr_name='foo', gr_passwd='x', gr_gid=1004, gr_mem=['user1', 'user2', 'user3', 'nonso'])
+2019-08-12 20:55:35,471: INFO: grp.struct_group(gr_name='newUsers', gr_passwd='x', gr_gid=1006, gr_mem=['kait', 'user1', 'user2', 'user3'])
+2019-08-12 20:55:35,471: INFO: generating unique users list from group name/(s)
+2019-08-12 20:55:35,471: INFO: names of users to be backuped: ['kait' 'nonso' 'user1' 'user2' 'user3']
+2019-08-12 20:55:37,999: INFO: back up permission not granted 1
+2019-08-12 20:56:56,515: INFO: input group name ['foo', 'root', 'newUsers']
+2019-08-12 20:56:56,517: INFO: grp.struct_group(gr_name='foo', gr_passwd='x', gr_gid=1004, gr_mem=['user1', 'user2', 'user3', 'nonso'])
+2019-08-12 20:56:56,517: INFO: grp.struct_group(gr_name='root', gr_passwd='x', gr_gid=0, gr_mem=[])
+2019-08-12 20:56:56,517: INFO: grp.struct_group(gr_name='newUsers', gr_passwd='x', gr_gid=1006, gr_mem=['kait', 'user1', 'user2', 'user3'])
+2019-08-12 20:56:56,517: INFO: generating unique users list from group name/(s)
+2019-08-12 20:56:56,517: INFO: names of users to be backuped: ['kait' 'nonso' 'user1' 'user2' 'user3']
+2019-08-12 20:57:01,316: INFO: back up permission not granted 1
+2019-08-12 21:18:28,026: INFO: input group name ['nn']
+2019-08-12 21:18:28,029: WARNING: input group name nn does not exist!
+2019-08-12 21:19:12,341: INFO: input group name ['foo']
+2019-08-12 21:19:12,342: INFO: grp.struct_group(gr_name='foo', gr_passwd='x', gr_gid=1004, gr_mem=['user1', 'user2', 'user3', 'nonso'])
+2019-08-12 21:19:12,342: INFO: generating unique users list from group name/(s)
+2019-08-12 21:19:12,342: INFO: names of users to be backuped: ['nonso' 'user1' 'user2' 'user3']
+2019-08-12 21:19:20,780: INFO: back up permission granted 0
+2019-08-12 21:19:23,601: INFO: get target directory name from terminal
+2019-08-12 21:30:05,639: INFO: input group name ['newUsers']
+2019-08-12 21:30:59,741: INFO: input group name ['newUsers']
+2019-08-12 21:30:59,742: INFO: grp.struct_group(gr_name='newUsers', gr_passwd='x', gr_gid=1006, gr_mem=['kait', 'user1', 'user2', 'user3'])
+2019-08-12 21:30:59,743: INFO: generating unique users list from group name/(s)
+2019-08-12 21:30:59,743: INFO: names of users to be backuped: ['kait' 'user1' 'user2' 'user3']
+2019-08-12 21:31:08,167: INFO: back up permission granted 0
+2019-08-12 21:31:11,499: INFO: get target directory name from terminal
