@@ -1,27 +1,36 @@
-from __future__ import print_function
-
-import mock
-import sys
+import app
 from group_backup import GroupMembersFiles
 
-if sys.version_info >= (3, 0):
-    ips = 'builtins.input'
-    #input = input
-else:
-    ips = '__builtin__.raw_input'
-    input = raw_input
+def test_app():
+    input_values = [2, 3]
+    output = []
+
+    def mock_input(s):
+        output.append(s)
+        return input_values.pop(0)
+    app.input = mock_input
+    app.print = lambda s: output.append(s)
+
+    app.main()
+
+    assert output == [
+        'First: ',
+        'Second: ',
+        'The result is 5',
+    ]
 
 
-def something():
-    print("test")
-    x = input('\nEnter stuff\n')
-    print("s")
-    return x
+def test_init():
+    input_grpname = "newUsers"
+    output = []
 
+    def mock_input(s):
+        output.append(s)
+        return input_grpname.pop(0)
 
-def test_something():
-    with mock.patch(ips, return_value='newUsers'):
+    GroupMembersFiles().input = mock_input
+    GroupMembersFiles().print = lambda s: output.append(s)
+    GroupMembersFiles()
 
-        assert GroupMembersFiles() == "newUsers"
-
+    assert output == ["newUsers"]
 

@@ -149,12 +149,14 @@ class GroupMembersFiles:
                 logging.warning("exit status = {}".format(str(self.res)))
         print("backup completed succesfully")
 
-try:
+if __name__ == "__main__":
 
-    group_names_input = GroupMembersFiles()
-    group_names_input.backup_group_user_files()
+    try:
 
-except KeyError:
+        group_names_input = GroupMembersFiles()
+        group_names_input.backup_group_user_files()
 
-    print("Backup process failed")
-    logging.error("back up process failed exit status => 1")
+    except KeyError:
+
+        print("Backup process failed")
+        logging.error("back up process failed exit status => 1")
