@@ -20,6 +20,7 @@ class GroupMembersFiles:
         grp_names = input("enter group name/(s): ")
         self.grp_names = grp_names.split(" ")
         logging.info("input group name {}".format(str(self.grp_names)))
+        print("generating group info")
         
          
     def get_grp_infos(self):
@@ -32,7 +33,6 @@ class GroupMembersFiles:
                 logging.info("{}".format(str(self.group_info_)))
 
             except KeyError:
-
                 print("input group name {} does not exist!".format(grp_name))
                 logging.warning(
                     "input group name {} does not exist!".format(grp_name))
@@ -95,7 +95,7 @@ class GroupMembersFiles:
             return self.os_dir
 
 
-    def creat_new_target_dir(self, os_dir):
+    def create_new_target_dir(self, os_dir):
         self.new_dir = os.mkdir(os_dir)
         return self.new_dir
 
@@ -118,20 +118,20 @@ class GroupMembersFiles:
         self.get_confirmation()  # assert back up permission
 
         # get back up directory as input from terminal
-        backup_target = input("enter target backup directory: ")
+        self.backup_target = input("enter target backup directory: ")
         logging.info("get target directory name from terminal")
 
         # check if directory exists, otherwise create target backup directory automatically
-        target_dir = self.check_backup_dir(backup_target)
+        target_dir = self.check_backup_dir(self.backup_target)
 
         if target_dir == 1:
-            print(backup_target, "does not exist.")
+            print(self.backup_target, "does not exist.")
             self.get_con_ = input(
-                "do you want this program to create {}? yes/no\n".format(backup_target))
+                "do you want this program to create {}? yes/no\n".format(self.backup_target))
 
             if self.get_con_ == "yes":
-                print("creating new backup directory {}".format(backup_target))
-                target_dir = self.creat_new_target_dir(backup_target)
+                print("creating new backup directory {}".format(self.backup_target))
+                target_dir = self.create_new_target_dir(self.backup_target)
             else:
                 exit(1)
 
@@ -139,25 +139,27 @@ class GroupMembersFiles:
         for user_name in grp_users:
             logging.info("starting backup of {}".format(user_name))
             self.res = subprocess.call(["cp", "-rf", "/home/"+user_name, str(target_dir)])
+            
 
             if self.res == 0:
                 logging.info(
                     "backup {} files to an archive directory successful".format(user_name))
                 logging.info("exit status = {}".format(str(self.res)))
+                print(
+                    "backup {} files to an archive directory successful".format(user_name))
             else:
                 logging.info(
                     "backup {} files to an archive directory failed".format(user_name))
                 logging.warning("exit status = {}".format(str(self.res)))
-        print("backup completed succesfully")
+                print("backup {} files to an archive directory failed".format(user_name))
 
-if __name__ == "__main__":
+        
+try:
 
-    try:
+    group_names_input = GroupMembersFiles()
+    group_names_input.backup_group_user_files()
 
-        group_names_input = GroupMembersFiles()
-        group_names_input.backup_group_user_files()
+except KeyError:
 
-    except KeyError:
-
-        print("Backup process failed")
-        logging.error("back up process failed exit status => 1")
+    print("Backup process failed")
+    logging.error("back up process failed exit status => 1")
