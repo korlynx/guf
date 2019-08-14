@@ -130,3 +130,11 @@
 2019-08-13 22:59:46,804: INFO: back up permission granted 0
 2019-08-13 22:59:50,879: INFO: get target directory name from terminal
 2019-08-13 23:00:05,018: INFO: starting backup of kait
+2019-08-14 17:18:25,594: INFO: input group name ['foo', 'newUsers']
+2019-08-14 17:18:25,596: INFO: grp.struct_group(gr_name='foo', gr_passwd='x', gr_gid=1004, gr_mem=['user1', 'user2', 'user3', 'nonso'])
+2019-08-14 17:18:25,597: INFO: grp.struct_group(gr_name='newUsers', gr_passwd='x', gr_gid=1006, gr_mem=['kait', 'user1', 'user2', 'user3'])
+2019-08-14 17:18:25,598: INFO: generating unique users list from group name/(s)
+2019-08-14 17:18:25,598: INFO: names of users to be backuped: ['kait' 'nonso' 'user1' 'user2' 'user3']
+2019-08-14 17:18:34,589: INFO: back up permission granted 0
+2019-08-14 17:18:38,009: INFO: get target directory name from terminal
+2019-08-14 17:18:40,637: INFO: starting backup of kait files

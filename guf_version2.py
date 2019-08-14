@@ -134,7 +134,7 @@ class GroupMembersFiles:
             exit(1)
 
         # copy members files to an archive directory
-        for user_name in tqdm(grp_users):
+        for user_name in tqdm(grp_users, desc='creating archive'):
             path_dir = "/home/"
             logging.info("starting backup of {} files".format(user_name))
             res_dir = copytree(path_dir+user_name, str(backup_target)+"/"+user_name)
@@ -145,14 +145,12 @@ class GroupMembersFiles:
             res_tar = make_archive(archive_name, 'gztar', root_dir)
 
             logging.info(
-                "created gzip’ed tar-file of backup of {}".format(user_name))
+                "created gzip’ed tar-file backup of {}".format(user_name))
             logging.info(
-                "backup files to {} successful".format(user_name))
+                "backup of {} files successful".format(user_name))
             logging.info("exit status = 0")
             
-            time.sleep(3)
-            print("backup of {} files to directory successful".format(user_name))
-            
+            time.sleep(3)   
 
 try:
 
@@ -161,5 +159,5 @@ try:
 
 except KeyError:
 
-    print("Backup process failed")
-    logging.error("back up process failed exit status => 1")
+    print("Backup process failed, something went wrong!!!")
+
