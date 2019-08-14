@@ -1,14 +1,16 @@
-
-import grp
-import subprocess
+from shutil import copytree, make_archive
 import os
+import grp
 import logging
 import itertools
 import numpy as np
+import time
+from tqdm import tqdm
 
 #create a log file
 logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
                     filename="backup.log", level=logging.DEBUG)
+
 
 class GroupMembersFiles:
     """
@@ -21,8 +23,7 @@ class GroupMembersFiles:
         self.grp_names = grp_names.split(" ")
         logging.info("input group name {}".format(str(self.grp_names)))
         print("generating group info")
-        
-         
+
     def get_grp_infos(self):
 
         for grp_name in self.grp_names:
@@ -40,7 +41,6 @@ class GroupMembersFiles:
                 logging.info(
                     "exit status 1 {} does not exist".format(grp_name))
 
-
     def get_unique_users(self):
         """"
         This function;
@@ -51,13 +51,12 @@ class GroupMembersFiles:
         for grp_name in self.grp_names:
             self.grp_name = grp_name
             self.grp_mem_.append(grp.getgrnam(self.grp_name).gr_mem)
-        
+
         self.grp_members = np.unique(
             list(itertools.chain.from_iterable(self.grp_mem_)))  # gets unique list of group members to avoid duplicate backup
         logging.info("generating unique users list from group name/(s)")
-        
-        return self.grp_members
 
+        return self.grp_members
 
     def get_confirmation(self):
         """"
@@ -69,18 +68,19 @@ class GroupMembersFiles:
 
         if self.get_con == "yes":
             self.con_exit = 0
-            logging.info("back up permission granted {}".format(str(self.con_exit)))
+            logging.info("back up permission granted {}".format(
+                str(self.con_exit)))
 
         elif self.get_con == "no":
             self.con_exit = 1
-            logging.info("back up permission not granted {}".format(str(self.con_exit)))
+            logging.info("back up permission not granted {}".format(
+                str(self.con_exit)))
             exit(1)
 
         else:
             logging.error("enter yes or no to confirm back up permission")
             print("answer with yes or no")
             self.get_confirmation()
-
 
     def check_backup_dir(self, os_dir):
         """
@@ -94,18 +94,16 @@ class GroupMembersFiles:
         else:
             return self.os_dir
 
-
     def create_new_target_dir(self, os_dir):
         self.new_dir = os.mkdir(os_dir)
         return self.new_dir
-
 
     def backup_group_user_files(self):
         """
         This function;
         - copys members all files to an archive directory
         """
-        
+
         grp_names_ = self.grp_names  # get group names from as input from terminal
 
         # get group informations
@@ -136,24 +134,26 @@ class GroupMembersFiles:
             exit(1)
 
         # copy members files to an archive directory
-        for user_name in grp_users:
-            logging.info("starting backup of {}".format(user_name))
-            self.res = subprocess.call(
-                ["cp", "-rf", "/home/"+user_name, str(backup_target)])
-            
-            if self.res == 0:
-                logging.info(
-                    "backup {} files to directory successful".format(user_name))
-                logging.info("exit status = {}".format(str(self.res)))
-                print(
-                    "backup {} files to directory successful".format(user_name))
-            else:
-                logging.info(
-                    "backup {} files to directory failed".format(user_name))
-                logging.warning("exit status = {}".format(str(self.res)))
-                print("backup {} files to directory failed".format(user_name))
+        for user_name in tqdm(grp_users):
+            path_dir = "/home/"
+            logging.info("starting backup of {} files".format(user_name))
+            res_dir = copytree(path_dir+user_name, str(backup_target)+"/"+user_name)
 
-        
+            # create gzip’ed tar-file archive
+            archive_name = os.path.expanduser(os.path.join(str(backup_target), user_name))
+            root_dir = os.path.expanduser(os.path.join(path_dir, user_name))
+            res_tar = make_archive(archive_name, 'gztar', root_dir)
+
+            logging.info(
+                "created gzip’ed tar-file of backup of {}".format(user_name))
+            logging.info(
+                "backup files to {} successful".format(user_name))
+            logging.info("exit status = 0")
+            
+            time.sleep(3)
+            print("backup of {} files to directory successful".format(user_name))
+            
+
 try:
 
     group_names_input = GroupMembersFiles()

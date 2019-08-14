@@ -1,7 +1,6 @@
 #!/bin/python
 
 import grp
-#import operator
 import subprocess
 import os
 import logging
@@ -16,7 +15,6 @@ def check_backup_dir(os_dir):
 
     if not os.path.exists(os_dir):
         print(os_dir, "does not exist.")
-        
         
         get_con_ = input(
             "Do you want this program to create {} ?  yes/no\n".format(os_dir))
