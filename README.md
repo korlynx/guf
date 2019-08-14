@@ -10,7 +10,7 @@ Python program that locates all files owned by the members of a group and move t
 
 * It takes also target directory as input from the promt.
 
-* If the tagert directory does not exist, it creates a new directory for the backup using.
+* If the input tagert directory does not exist, it creates a new directory for the backup using the input target directory name.
 
 # compactaility
 
@@ -18,5 +18,5 @@ This program is compactable with python 3 only.
 
 # dependencies
 
-* python
+* python3
 * tqdm
