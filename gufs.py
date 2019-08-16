@@ -150,14 +150,21 @@ class GroupMembersFiles:
                 "backup of {} files successful".format(user_name))
             logging.info("exit status = 0")
             
-            time.sleep(3)   
+            time.sleep(3)
 
-try:
 
+def gufs():
     group_names_input = GroupMembersFiles()
     group_names_input.backup_group_user_files()
+    print("backup process completed")
 
-except KeyError:
 
-    print("Backup process failed, something went wrong!!!")
+if __name__ == "__main__":
+    try:
+
+        gufs()
+
+    except KeyError:
+
+        print("Backup process failed, something went wrong!!!")
 
