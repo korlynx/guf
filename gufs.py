@@ -18,11 +18,13 @@ class GroupMembersFiles:
     locates all files owned by the members of a group and moved them to an archive folder 
     """
 
+
     def __init__(self):
         grp_names = input("enter group name/(s): ")
         self.grp_names = grp_names.split(" ")
         logging.info("input group name {}".format(str(self.grp_names)))
         print("generating group info")
+
 
     def get_grp_infos(self):
 
@@ -41,6 +43,7 @@ class GroupMembersFiles:
                 logging.info(
                     "exit status 1 {} does not exist".format(grp_name))
 
+
     def get_unique_users(self):
         """"
         This function;
@@ -57,6 +60,7 @@ class GroupMembersFiles:
         logging.info("generating unique users list from group name/(s)")
 
         return self.grp_members
+
 
     def get_confirmation(self):
         """"
@@ -82,6 +86,7 @@ class GroupMembersFiles:
             print("answer with yes or no")
             self.get_confirmation()
 
+
     def check_backup_dir(self, os_dir):
         """
         This function;
@@ -94,16 +99,17 @@ class GroupMembersFiles:
         else:
             return self.os_dir
 
+
     def create_new_target_dir(self, os_dir):
         self.new_dir = os.mkdir(os_dir)
         return self.new_dir
+
 
     def backup_group_user_files(self):
         """
         This function;
         - copys members all files to an archive directory
         """
-
         grp_names_ = self.grp_names  # get group names from as input from terminal
 
         # get group informations
@@ -121,7 +127,6 @@ class GroupMembersFiles:
 
         # check if directory exists, otherwise create target backup directory automatically
         target_dir = self.check_backup_dir(backup_target)
-
         if target_dir == 1:
             print(backup_target, "does not exist.")
             self.get_con_ = input(
