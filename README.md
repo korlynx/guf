@@ -5,7 +5,7 @@ gufs after being called, takes input (name of a group or groups) from the comman
 
 ## Usage
 
-* First ensure you python version 3 and above running on your linux operating system.
+* First ensure you have python version 3 and above running on your linux operating system.
 
 * Clone the guf repo, cd into the guf directory and run the  gufs.py script on your linux terminal. Note, user needs a root previledge to completely backup other users files.
 
