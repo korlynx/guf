@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from shutil import copytree, make_archive
 import os
 import grp
@@ -5,20 +6,13 @@ import logging
 import itertools
 import numpy as np
 import time
+
+# progress bar
 from tqdm import tqdm
 
-#create a log file
-logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
-                    filename="backup.log", level=logging.DEBUG)
-
-
 class GroupMembersFiles:
+    """Locates all files owned by the members of a group and moved them to an archive folder .
     """
-    This program 
-    locates all files owned by the members of a group and moved them to an archive folder 
-    """
-
-
     def __init__(self):
         grp_names = input("enter group name/(s): ")
         self.grp_names = grp_names.split(" ")
@@ -45,9 +39,7 @@ class GroupMembersFiles:
 
 
     def get_unique_users(self):
-        """"
-        This function;
-        - creates a unique list of all users, incase a user belongs to multiple groups
+        """"Creates a unique list of all users, incase a user belongs to multiple groups.
         """
 
         self.grp_mem_ = list()
@@ -63,9 +55,7 @@ class GroupMembersFiles:
 
 
     def get_confirmation(self):
-        """"
-        This function;
-        - Gets backup confirmation from admin.
+        """"Gets backup confirmation from admin.
         """
         self.get_con = input(
             "Do you want to continue to back up files for all group users above? yes/no\n")
@@ -88,10 +78,8 @@ class GroupMembersFiles:
 
 
     def check_backup_dir(self, os_dir):
-        """
-        This function;
-        - checks if target backup directory exists
-        - otherwise it creates target backup directory automatically
+        """Checks if target backup directory exists,
+        otherwise it creates target backup directory automatically
         """
         self.os_dir = os_dir
         if not os.path.exists(self.os_dir):
@@ -107,8 +95,7 @@ class GroupMembersFiles:
 
     def backup_group_user_files(self):
         """
-        This function;
-        - copys members all files to an archive directory
+        Copys members all files to an archive directory
         """
         grp_names_ = self.grp_names  # get group names from as input from terminal
 
@@ -142,7 +129,8 @@ class GroupMembersFiles:
         for user_name in tqdm(grp_users, desc='creating archive'):
             path_dir = "/home/"
             logging.info("starting backup of {} files".format(user_name))
-            res_dir = copytree(path_dir+user_name, str(backup_target)+"/"+user_name)
+            # create directory for individual user files
+            # res_dir = copytree(path_dir+user_name, str(backup_target)+"/"+user_name)
 
             # create gzip’ed tar-file archive
             archive_name = os.path.expanduser(os.path.join(str(backup_target), user_name))
@@ -158,18 +146,14 @@ class GroupMembersFiles:
             time.sleep(3)
 
 
-def gufs():
+def guf():
+    #create a log file
+    logging.basicConfig(format='%(asctime)s: %(levelname)s: %(message)s',
+                    filename="backup.log", level=logging.DEBUG)
     group_names_input = GroupMembersFiles()
     group_names_input.backup_group_user_files()
     print("backup process completed")
 
 
 if __name__ == "__main__":
-    try:
-
-        gufs()
-
-    except KeyError:
-
-        print("Backup process failed, something went wrong!!!")
-
+    guf()
